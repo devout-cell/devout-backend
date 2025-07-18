@@ -1,0 +1,57 @@
+// index.js
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import nodemailer from "nodemailer";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.post("/send-email", async (req, res) => {
+  const { name, email, phone } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "benolopesdias@gmail.com",
+      pass: "gvmc dqet cgdq nalo",
+    },
+  });
+
+  const mailOptions = {
+    from: "comercial@devout.com.br",
+    to: email,
+    subject: "Obrigado por baixar o artigo!",
+    text: `Olá ${name},\n\nObrigado pelo interesse! Segue em anexo o artigo completo.\nSe não conseguir baixar, está aqui novamente: https://seu-dominio.com/artigo-lourivaldo.pdf`,
+    attachments: [
+      {
+        filename: "artigo.pdf",
+        path: path.join(__dirname, "artigo.pdf"),
+      },
+    ],
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send("E-mail enviado com sucesso");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Erro ao enviar e-mail");
+  }
+});
+
+app.get("/artigo-lourivaldo.pdf", (req, res) => {
+  res.sendFile(path.join(__dirname, "artigo.pdf"));
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
