@@ -10,7 +10,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://devout-lp.vercel.app/", // ou o domínio do seu frontend
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
