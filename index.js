@@ -20,8 +20,8 @@ app.post("/send-email", async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "benolopesdias@gmail.com",
-      pass: "gvmc dqet cgdq nalo",
+      user: "devoutcomercial@gmail.com",
+      pass: "plcl qkea ifmb oxce",
     },
   });
 
@@ -29,7 +29,7 @@ app.post("/send-email", async (req, res) => {
     from: "comercial@devout.com.br",
     to: email,
     subject: "Obrigado por baixar o artigo!",
-    text: `Olá ${name},\n\nObrigado pelo interesse! Segue em anexo o artigo completo.\nSe não conseguir baixar, está aqui novamente: https://seu-dominio.com/artigo-lourivaldo.pdf`,
+    text: `Olá ${name},\n\nObrigado pelo interesse! Segue em anexo o artigo completo.\nSe não conseguir baixar, favor entrar em contato com o suporte pelo nosso site ou pelo whatApp: +55 11 91122-7079`,
     attachments: [
       {
         filename: "artigo.pdf",
