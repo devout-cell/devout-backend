@@ -26,7 +26,7 @@ app.post("/send-email", async (req, res) => {
   });
 
   const mailOptions = {
-    from: "comercial@devout.com.br",
+    from: "devoutcomercial@gmail.com",
     to: [email, "comercial@devout.com.br"],
     subject: "Obrigado por baixar o artigo!",
     text: `Olá ${name},\n\nObrigado pelo interesse! Segue em anexo o artigo completo.\nSe não conseguir baixar, favor entrar em contato com o suporte pelo nosso site ou pelo whatApp: +55 11 91122-7079`,
